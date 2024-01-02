@@ -1,12 +1,16 @@
 "use client";
-import { sidebarLinks } from "@/constants";
-import Image from "next/image";
+
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
+import { sidebarLinks } from "@/constants";
+import { SignOutButton, SignedIn, useAuth } from "@clerk/nextjs";
 
 function LeftSidebar() {
 	const router = useRouter();
 	const pathName = usePathname();
+
+	const { userId } = useAuth();
 
 	return (
 		<section className='custom-scrollbar leftsidebar'>
@@ -15,6 +19,8 @@ function LeftSidebar() {
 					const isActive =
 						(pathName.includes(link.route) && link.route.length > 1) ||
 						pathName === link.route;
+
+					if (link.route === "/profile") link.route = `${link.route}/${userId}`;
 
 					return (
 						<Link
@@ -32,6 +38,22 @@ function LeftSidebar() {
 						</Link>
 					);
 				})}
+			</div>
+
+			<div className='px-6 mt-10'>
+				<SignedIn>
+					<SignOutButton signOutCallback={() => router.push("/sign-in")}>
+						<div className='flex gap-4 p-4 cursor-pointer'>
+							<Image
+								src='/assets/logout.svg'
+								alt='logout'
+								width={24}
+								height={24}
+							/>
+							<p className='text-light-2 max-lg:hidden'>Logout</p>
+						</div>
+					</SignOutButton>
+				</SignedIn>
 			</div>
 		</section>
 	);
