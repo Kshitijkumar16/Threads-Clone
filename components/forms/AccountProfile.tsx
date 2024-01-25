@@ -61,8 +61,8 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
 		if (hasImageChanged) {
 			const imgRes = await startUpload(files);
 
-			if (imgRes && imgRes[0].fileUrl) {
-				values.profile_photo = imgRes[0].fileUrl;
+			if (imgRes && imgRes[0].url) {
+				values.profile_photo = imgRes[0].url;
 			}
 		}
 
@@ -145,6 +145,7 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
 									onChange={(e) => handleImage(e, field.onChange)}
 								/>
 							</FormControl>
+							<FormMessage />
 						</FormItem>
 					)}
 				/>

@@ -3,8 +3,8 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { Inter } from "next/font/google";
 
 export const metadata = {
-	title: "Threads",
-	description: "A Next.js 14  Meta Threads App",
+	title: "Threads | A New Way to Socialize and get along.",
+	description: "A Next.js 14 Meta Threads App",
 };
 
 const inter = Inter({ subsets: ["latin"] });
